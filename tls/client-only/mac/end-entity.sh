@@ -41,7 +41,9 @@ DNS.1 = $DNS_END_ENTITY
 EOF
 
 # Generate client's private key and certificate signing request (CSR)
-openssl req -newkey rsa:4096 -nodes -keyout "${UNIQUE_NAME}.key" -out "${UNIQUE_NAME}-req.csr" -config "${UNIQUE_NAME}.conf"
+#openssl req -newkey rsa:4096 -nodes -keyout "${UNIQUE_NAME}.key" -out "${UNIQUE_NAME}-req.csr" -config "${UNIQUE_NAME}.conf"
+openssl ecparam -name secp521r1 -genkey -check -out "${UNIQUE_NAME}.key"
+openssl req -new -nodes -key "${UNIQUE_NAME}.key" -out "${UNIQUE_NAME}-req.csr" -config "${UNIQUE_NAME}.conf"
 
 echo "Signing certificate"
 

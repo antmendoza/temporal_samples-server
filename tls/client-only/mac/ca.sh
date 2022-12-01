@@ -43,7 +43,8 @@ DNS.1 = $DNS_ROOT
 
 EOF
 
-openssl genrsa -out ca.key 4096
+#openssl genrsa -out ca.key 4096
+openssl ecparam -name secp521r1 -genkey -check -out ca.key
 chmod 0755 ca.key 
 
 openssl req -new -x509 -days 365 -key ca.key -out ca.pem -config ca.conf
